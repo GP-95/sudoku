@@ -1,25 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import './tailwind.css'
+import { useEffect, useState } from 'react'
+import { createBoard } from './game'
+import Row from './components/Row'
+import Button from './components/Button'
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const [board, setBoard] = useState([])
+
+	useEffect(() => {
+		setBoard(createBoard())
+	}, [])
+	return (
+		<main className='w-screen h-screen flex flex-col justify-center items-center'>
+			<div className='flex justify-between w-[250px]'>
+				<Button
+					name='New Game'
+					customStyle='bg-blue-400'
+					handleClick={() => setBoard(createBoard())}
+				/>
+				<Button
+					name='Reset'
+					type='reset'
+					customStyle='bg-blue-400'
+					handleClick={() => alert('Todo')}
+				/>
+			</div>
+			<div className='flex flex-col items-center justify-center bg-gray-300 p-4 border-2 border-black'>
+				{board.map((row, index) => (
+					<Row row={row} rowIndex={index} key={index} />
+				))}
+			</div>
+		</main>
+	)
 }
 
-export default App;
+export default App
