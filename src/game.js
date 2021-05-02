@@ -22,7 +22,7 @@ export function shiftArray(arr, step = 0) {
 	return newArray
 }
 
-/** Creates an array of 9 array, each containing 9 numbers */
+/** Creates an array of 9 arrays, each containing 9 numbers */
 export function createBoard() {
 	//   Declare state
 	const base = [1, 2, 3, 4, 5, 6, 7, 8, 9]
@@ -33,16 +33,12 @@ export function createBoard() {
 
 	//   Create board
 	while (newBoard.length < 9) {
-		switch (true) {
-			case newBoard.length === 0 ? true : false:
-				newBoard.push(base)
-				break
-			case newBoard.length === 3 || newBoard.length === 6 ? true : false:
-				newBoard.push(shiftArray(newBoard[newBoard.length - 1], 1))
-				break
-			default:
-				newBoard.push(shiftArray(newBoard[newBoard.length - 1], 3))
-				break
+		if (newBoard.length === 0) {
+			newBoard.push(base)
+		} else if (newBoard.length === 3 || newBoard.length === 6) {
+			newBoard.push(shiftArray(newBoard[newBoard.length - 1], 1))
+		} else {
+			newBoard.push(shiftArray(newBoard[newBoard.length - 1], 3))
 		}
 	}
 	return newBoard
