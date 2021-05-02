@@ -1,41 +1,42 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
+import { ScoreContext } from '../App'
 
 function Box({ digit, columnIndex, hidden }) {
 	const [boxValue, setBoxValue] = useState('')
+	const { score, setScore } = useContext(ScoreContext)
+	const [counted, setCounted] = useState(false)
 	useEffect(() => {
 		if (!hidden) {
 			setBoxValue(digit)
 			return
 		}
-
 		setBoxValue('')
 	}, [hidden, digit])
 
-	if (!hidden) {
-		return (
-			<input
-				tabIndex={-1}
-				className={`sm:w-14 sm:h-14 w-8 h-8 text-gray-700 bg-yellow-400 focus:bg-yellow-300 hover:bg-yellow-300 border rounded border-white cursor-pointer m-1 focus:outline-none text-center transition-color ${
-					columnIndex === 2 || columnIndex === 5 ? 'mr-3' : null
-				}`}
-				type='text'
-				value={boxValue}
-				readOnly
-				onClick={() => console.log(digit)}
-			/>
-		)
+	function handleChange(newValue) {
+		setBoxValue(newValue)
+		if (newValue == digit && !counted) {
+			setScore((score) => score + 1)
+			setCounted(true)
+			return
+		} else if (newValue != digit && counted) {
+			setScore((score) => score - 1)
+			setCounted(false)
+			return
+		}
 	}
 
 	return (
 		<input
-			className={`sm:w-14 sm:h-14 w-8 h-8 text-gray-700 bg-yellow-400 focus:bg-yellow-300 hover:bg-yellow-300 border rounded border-white cursor-pointer m-1 focus:outline-none text-center transition-color ${
+			className={` w-6 h-6 sm:w-8 sm:h-8 md:w-14 md:h-14 text-gray-700 bg-yellow-400 focus:bg-yellow-300 hover:bg-yellow-300 border rounded border-white cursor-pointer m-1 focus:outline-none text-center transition-color select-none ${
 				columnIndex === 2 || columnIndex === 5 ? 'mr-3' : null
 			}`}
 			type='text'
 			value={boxValue}
 			minLength={1}
 			maxLength={1}
-			onChange={(e) => setBoxValue(e.target.value)}
+			readOnly={!hidden}
+			onChange={(e) => handleChange(e.target.value)}
 			onClick={() => console.log(digit)}
 		/>
 	)
