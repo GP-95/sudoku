@@ -1,3 +1,4 @@
+/* eslint-disable */
 import Box from './Box'
 import { randomInRange } from '../game'
 import { useEffect, useState, useContext } from 'react'

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import './tailwind.css'
 import { createContext, useEffect, useState } from 'react'
 import { createBoard } from './game'

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { useEffect, useState, useContext } from 'react'
 import { ScoreContext } from '../App'
 

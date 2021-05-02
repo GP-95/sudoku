@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 /**Shuffles an array randomly */
 export function shuffleArray(array) {
 	for (var i = array.length - 1; i > 0; i--) {

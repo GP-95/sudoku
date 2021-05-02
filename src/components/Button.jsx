@@ -1,3 +1,4 @@
+/* eslint-disable */
 function Button({
 	customStyle,
 	handleClick,
