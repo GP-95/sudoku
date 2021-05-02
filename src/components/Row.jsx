@@ -9,7 +9,7 @@ function Row({ row, rowIndex }) {
 	const { setScore } = useContext(ScoreContext)
 
 	useEffect(() => {
-		const numOfHiddenField = randomInRange(7, 8)
+		const numOfHiddenField = randomInRange(6, 8)
 		const boxArr = []
 		for (let i = 0; i < numOfHiddenField; i++) {
 			let randomDigit = randomInRange(0, 9)
